@@ -13,14 +13,16 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
-data_barang_wishlist = BarangWishlist.objects.all()
-context = {
-'list_barang': data_barang_wishlist,
-'nama': 'Triazz'
-}
+
 
 # Create your views here.
 def register(request):
+    data_barang_wishlist = BarangWishlist.objects.all()
+    context = {
+    'list_barang': data_barang_wishlist,
+    'nama': 'Triazz'
+    }
+
     form = UserCreationForm()
 
     if request.method == "POST":
@@ -61,6 +63,7 @@ def show_wishlist(request):
     'list_barang': data_barang_wishlist,
     'nama': 'Triazz',
     'last_login': request.COOKIES['last_login'],
+    'username' : request.user.username, 
     }
 
     return render(request, "wishlist.html", context)
